@@ -1,6 +1,8 @@
 <div class="rounded-br-md rounded-bl-md  shadow-md shadow-purple-800">
     <div
-        class="border-4 border-black justify-between items-center py-1 px-1 text-xl text-white title text-lg bg-gradient-to-r from-black via-gray-800 to-black">
+        class="border-4 border-black justify-between items-center py-1 px-1 text-xl text-white 
+                title text-lg bg-gradient-to-tr from-gray-800 via-gray-700 to-gray-800
+    ">
         <div class="flex justify-between gap-2 items-center pl-1">
             <div class="flex gap-3 items-center">
                 <span class="fa-solid fa-terminal"></span>

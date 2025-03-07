@@ -9,7 +9,7 @@ url: /blog/rvo/index.html
 section: content
 ---
 
-# Optimizing Return Value Optimization
+<h1 class="text-verde">Optimizing Return Value Optimization</h1>
 
 **[Placeholder-WIP]**
 

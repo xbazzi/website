@@ -29,12 +29,13 @@
             <div class="prose prose-stone text-black">
                 <p>
                     Software and aerospace engineer. Experienced in socket, 
-                    systems, and scientific programming. Currently working on kernel drivers
-                    and machine learning.
+                    systems, and scientific programming. Currently dipping my 
+                    toes in Rust, Go, and Scheme while working on quantitative development 
+                    and competitive programming.
                 </p>
                 <p>
                     I have spent more hours configuring DevOps and infrastructure than I'm willing
-                    to admit. Check out the <a href="/projects/datacenter/index.html">"datacenter"</a>.
+                    to admit -- check out the <a href="/projects/datacenter/index.html">"datacenter"</a>.
                 </p>
                 <p>
                     As you can see, I am not a front end developer.
@@ -70,15 +71,15 @@
         </div>
         <div class="col-span-4 flex flex-col gap-8">
             <x-terminal-window title="links" icon="link">
+                {{-- ['text' => 'Home', 'newtab' => false, 'icon_type' => 'solid', 'icon' => 'home', 'link' => ''], --}}
                 @php
                     $links = [
-                        ['text' => 'Home', 'newtab' => false, 'icon_type' => 'solid', 'icon' => 'home', 'link' => ''],
+                        ['text' => 'GitHub', 'icon_type' => 'brands', 'icon' => 'github', 'link' => 'https://github.com/xbazzi'],
+                        ['text' => 'LinkedIn', 'icon_type' => 'brands', 'icon' => 'linkedin', 'link' => 'https://linkedin.com/in/alexbazzi'],
                         ['text' => 'Gitea', 'icon_type' => 'brands', 'icon' => 'git-alt', 'link' => 'https://gitgud.foo'],
                         ['text' => 'Vikunja', 'icon_type' => 'solid', 'icon' => 'clipboard', 'link' => 'https://todo.dudeget.online'],
                         ['text' => 'NextCloud', 'icon_type' => 'solid', 'icon' => 'cloud', 'link' => 'https://cloud.dudeget.online'],
                         ['text' => 'Mattermost', 'icon_type' => 'solid', 'icon' => 'message', 'link' => 'https://chat.thegrind.dev'],
-                        ['text' => 'GitHub', 'icon_type' => 'brands', 'icon' => 'github', 'link' => 'https://github.com/xbazzi'],
-                        ['text' => 'LinkedIn', 'icon_type' => 'brands', 'icon' => 'linkedin', 'link' => 'https://linkedin.com/in/alexbazzi'],
                     ];
                 @endphp
                 <div class="text-verde p-3">
