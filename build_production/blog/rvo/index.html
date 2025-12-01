@@ -9,8 +9,15 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     <title>Optimizing Return Value Optimization</title>
     <script src="https://kit.fontawesome.com/6faa1ef8ce.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/assets/build/css/main.css?id=5d2b23395a68b61dd62762010ea4965c">
-    <script defer src="/assets/build/js/main.js?id=87e20e630f0ef874f012ef2d57511382"></script>
+    <link rel="stylesheet" href="/assets/build/css/main.css?id=724754a46976fee5326881242a2f242c">
+    <script defer src="/assets/build/js/main.js?id=ed5b871050427a49c5b52e99f8136b16"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/nord.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+
+    <!-- and it's easy to individually load additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+
+    <script>hljs.highlightAll();</script>
 </head>
 
 <body class="text-gray-900 py-10 antialiased">
@@ -36,13 +43,81 @@
     </div>
     <div class="p-1 text-verde rounded-br-md rounded-bl-md 
                 bg-gradient-to-b from-black/90 via-gray-900/90 to-black/90">
-        <p class="font-bold text-xsm pl-4 pt-4 text-verde text-xs">Written by Xander Bazzi on 01-25-24</p>
+        <p class="font-bold text-xsm pl-4 pt-4 text-verde text-xs">Written by Xander Bazzi on 01-25-25</p>
         <div class="my-4 mx-auto prose prose-invert prose-img:max-w-lg prose-img:mx-auto">
-            <h1 class="text-verde">Optimizing Return Value Optimization</h1>
+            <h1 class="text-verde">Optimizing RVO</h1>
 
-<p><strong>[Placeholder-WIP]</strong></p>
+<p>Look at the code snippet below. How many times is <code>MyType{}</code> constructed? What about <code>std::optional&lt;MyType&gt;</code>?</p>
 
-<p>RVO sometimes good, sometimes not good :/</p>
+<pre><code class="language-cpp">std::optional&lt;MyType&gt; get_mytype(std::uint64_t some_val) {
+    if (!some_val) {
+        return std::nullopt;
+    }
+    return MyType{};
+}
+</code></pre>
+
+<p>If you've used C++17's <code>std::optional</code>, you might have code that resembles the above. But is this the proper way of returning an <code>optional</code>? Let's reason about it:
+1)   We call the <code>MyType</code> default constructor
+2)   Then we call the optional copy constructor <em>implicitly</em> with the <code>MyType</code> value. Wait, but then are we constructing two objects? One <code>optional</code> and one <code>MyType</code>?
+3)   No, that can't be... We must be constructing the <code>MyType</code> r-value inside the optional. But then that means the <code>optional</code> had to be constructed prior...</p>
+
+<p>After going throught these mental gymnastics, you might reach the conclusion that there are technically <em>two</em> constructions. And reasonably so, you might also assume that the compiler will optimize them both into a single in-place construction of an <code>optional</code> with the corresponding <code>MyType</code> object (somehow). Unfortunately, in true CPP fashion, this couldn't be further from the truth.</p>
+
+<p>Let's replace our <code>get_mytype</code> function with something a little more useful. To help us get some insight into the object lifetime, let's write a function that returns a canonical <code>Lifetime</code> tracker:</p>
+
+<pre><code class="language-cpp">std::optional&lt;Lifetime&gt; get_lifetime(std::uint64_t key)
+{
+    if (key &lt; 42ULL) {
+        return std::nullopt;
+    }
+    return Lifetime {};
+}
+</code></pre>
+
+<p>And let's suppose we call it with:</p>
+
+<pre><code class="language-cpp">auto main() -&gt; int {
+    std::optional&lt;Lifetime&gt; a = get_lifetime(100ULL);
+}
+</code></pre>
+
+<p>Which generates the following output:</p>
+
+<pre><code class="language-text">1       Lifetime::Lifetime()
+2-&gt;1    Lifetime::Lifetime(Lifetime&amp;&amp;)
+2       Lifetime::~Lifetime()
+1       Lifetime::~Lifetime()
+</code></pre>
+
+<p>Inspecting the result, we can see that there are two constructions in total (and two corresponding destructions):
+    - One <em>default construction</em> of the unnamed <code>Lifetime</code> from the <code>get_lifetime()</code> function
+    - And another <em>move construction</em> by moving that temporary into <code>a</code> in the <code>main()</code> (caller) context</p>
+
+<p>You probably expected C++17's guaranteed copy-elision (for unnamed RVO) to completely skip the construction inside <code>get_lifetime()</code> and instead just construct it at the caller site. The only problem is that URVO is only guaranteed when the return type <em>exactly matches</em> the caller type. In our case, a <code>Lifetime</code> <em>is not</em> an <code>std::optional&lt;Lifetime&gt;</code>, so we need to first construct the <code>Lifetime</code> and call the <code>std::optional&lt;Lifetime&gt;</code> constructor (which moves or copies the <code>Lifetime</code>).</p>
+
+<p>To tell <code>std::optional</code> that we want to construct a <code>Lifetime</code> in-place, we have to use <code>std::in_place</code>; bet you didn't see that one coming. Here's the revised correct copy-elided version that leverages URVO:</p>
+
+<pre><code class="language-cpp">std::optional&lt;Lifetime&gt; get_lifetime(std::uint64_t key)
+{
+    if (key &lt; 42ULL) {
+        return std::nullopt;
+    }
+    return std::optional&lt;Lifetime&gt; {std::in_place};
+}
+</code></pre>
+
+<p>Now we get the expected behavior: the <code>Lifetime</code> constructor is called <em>once</em>.</p>
+
+<pre><code class="language-text">1       Lifetime::Lifetime()
+1       Lifetime::~Lifetime()
+</code></pre>
+
+<p>I know what you're thinking. Yes, there is an <code>std::optional</code> parameterized constructor that takes in an <code>std::in_place</code>. Same thing goes for <code>std::expected</code>, <code>std::tuple</code>, <code>std::pair</code>, and probably other STL wrappers.</p>
+
+<p><img src="/assets/img/optional_ctors.png" alt="std::optional constructors" /></p>
+
+<p>Another C++ idiosyncracy to be aware of. On to the next one.</p>
         </div>
     </div>
 </div>

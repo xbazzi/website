@@ -26,6 +26,11 @@
     --font-size-code: 13px;
 }
 
+pre {
+    background-color: transparent !important;
+
+}
+
 html {
     min-height: 100%;
 }
