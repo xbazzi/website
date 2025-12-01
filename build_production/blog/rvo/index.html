@@ -9,9 +9,9 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     <title>Optimizing Return Value Optimization</title>
     <script src="https://kit.fontawesome.com/6faa1ef8ce.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/assets/build/css/main.css?id=724754a46976fee5326881242a2f242c">
-    <script defer src="/assets/build/js/main.js?id=ed5b871050427a49c5b52e99f8136b16"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/nord.min.css">
+    <link rel="stylesheet" href="/assets/build/css/main.css?id=cf2b55bf3f98bc6a66142a65817cfcae">
+    <script defer src="/assets/build/js/main.js?id=01df21462df854b43af5932420e47cda"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/night-owl.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
 
     <!-- and it's easy to individually load additional languages -->
@@ -42,7 +42,7 @@
 
     </div>
     <div class="p-1 text-verde rounded-br-md rounded-bl-md 
-                bg-gradient-to-b from-black/90 via-gray-900/90 to-black/90">
+                bg-gradient-to-b from-black/90 via-black/90 to-black/90">
         <p class="font-bold text-xsm pl-4 pt-4 text-verde text-xs">Written by Xander Bazzi on 01-25-25</p>
         <div class="my-4 mx-auto prose prose-invert prose-img:max-w-lg prose-img:mx-auto">
             <h1 class="text-verde">Optimizing RVO</h1>
@@ -64,7 +64,7 @@
 
 <p>After going throught these mental gymnastics, you might reach the conclusion that there are technically <em>two</em> constructions. And reasonably so, you might also assume that the compiler will optimize them both into a single in-place construction of an <code>optional</code> with the corresponding <code>MyType</code> object (somehow). Unfortunately, in true CPP fashion, this couldn't be further from the truth.</p>
 
-<p>Let's replace our <code>get_mytype</code> function with something a little more useful. To help us get some insight into the object lifetime, let's write a function that returns a canonical <code>Lifetime</code> tracker:</p>
+<p>Let's replace our <code>get_mytype</code> function with something a little more useful. To help us get some insight into the object lifetime, let's write a function that returns a canonical <code>Lifetime</code> <a href="https://github.com/xbazzi/programmatic-playground/blob/master/cpp/my_std_lib/Lifetime.cc">tracker</a>:</p>
 
 <pre><code class="language-cpp">std::optional&lt;Lifetime&gt; get_lifetime(std::uint64_t key)
 {
