@@ -13,7 +13,7 @@
 
     </div>
     <div class="p-1 text-verde rounded-br-md rounded-bl-md 
-                bg-gradient-to-b from-black/90 via-gray-900/90 to-black/90">
+                bg-gradient-to-b from-black/90 via-black/90 to-black/90">
         {{ $slot }}
     </div>
 </div>

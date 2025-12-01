@@ -77,9 +77,6 @@
                         ['text' => 'GitHub', 'icon_type' => 'brands', 'icon' => 'github', 'link' => 'https://github.com/xbazzi'],
                         ['text' => 'LinkedIn', 'icon_type' => 'brands', 'icon' => 'linkedin', 'link' => 'https://linkedin.com/in/alexbazzi'],
                         ['text' => 'Gitea', 'icon_type' => 'brands', 'icon' => 'git-alt', 'link' => 'https://gitgud.foo'],
-                        ['text' => 'Vikunja', 'icon_type' => 'solid', 'icon' => 'clipboard', 'link' => 'https://todo.dudeget.online'],
-                        ['text' => 'NextCloud', 'icon_type' => 'solid', 'icon' => 'cloud', 'link' => 'https://cloud.dudeget.online'],
-                        ['text' => 'Mattermost', 'icon_type' => 'solid', 'icon' => 'message', 'link' => 'https://chat.thegrind.dev'],
                     ];
                 @endphp
                 <div class="text-verde p-3">

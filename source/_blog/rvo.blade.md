@@ -29,7 +29,7 @@ If you've used C++17's `std::optional`, you might have code that resembles the a
 
 After going throught these mental gymnastics, you might reach the conclusion that there are technically *two* constructions. And reasonably so, you might also assume that the compiler will optimize them both into a single in-place construction of an `optional` with the corresponding `MyType` object (somehow). Unfortunately, in true CPP fashion, this couldn't be further from the truth.
 
-Let's replace our `get_mytype` function with something a little more useful. To help us get some insight into the object lifetime, let's write a function that returns a canonical `Lifetime` tracker:
+Let's replace our `get_mytype` function with something a little more useful. To help us get some insight into the object lifetime, let's write a function that returns a canonical `Lifetime` [tracker](https://github.com/xbazzi/programmatic-playground/blob/master/cpp/my_std_lib/Lifetime.cc):
 
 ```cpp
 std::optional<Lifetime> get_lifetime(std::uint64_t key)
