@@ -9,7 +9,7 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     <title>Optimizing Return Value Optimization</title>
     <script src="https://kit.fontawesome.com/6faa1ef8ce.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/assets/build/css/main.css?id=cf2b55bf3f98bc6a66142a65817cfcae">
+    <link rel="stylesheet" href="/assets/build/css/main.css?id=924fa466ba1d913e3b24618846a5b3eb">
     <script defer src="/assets/build/js/main.js?id=01df21462df854b43af5932420e47cda"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/night-owl.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
@@ -94,7 +94,9 @@
     - One <em>default construction</em> of the unnamed <code>Lifetime</code> from the <code>get_lifetime()</code> function
     - And another <em>move construction</em> by moving that temporary into <code>a</code> in the <code>main()</code> (caller) context</p>
 
-<p>I know what you're thinking: "the compiler will optimize both of these into one construction". And you'd be correct. These issues only manifest themselves with -O0. You actually have nothing to worry about. Unless your function is not inline-able or you <a href="https://www.youtube.com/watch?v=DzUAqXMUjtc">somehow mess up RVO</a>.</p>
+<blockquote class="border-l-4 border-blue-400 bg-gray-800 p-4 italic my-4 text-white">
+I know what you're thinking: "the compiler will optimize both of these into one construction". And you'd be correct. These issues only manifest themselves with -O0. You actually have nothing to worry about. Unless your function is not inline-able or you <a href="https://www.youtube.com/watch?v=DzUAqXMUjtc" class="text-blue-300 hover:text-blue-200">somehow mess up RVO</a>.
+</blockquote>
 
 <p>You probably expected C++17's guaranteed copy-elision (for unnamed RVO) to completely skip the construction inside <code>get_lifetime()</code> and instead just construct it at the caller site. The only problem is that URVO is only guaranteed when the return type <em>exactly matches</em> the caller type. In our case, a <code>Lifetime</code> <em>is not</em> an <code>std::optional&lt;Lifetime&gt;</code>, so we need to first construct the <code>Lifetime</code> and call the <code>std::optional&lt;Lifetime&gt;</code> constructor (which moves or copies the <code>Lifetime</code>).</p>
 
