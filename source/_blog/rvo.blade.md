@@ -61,6 +61,8 @@ Inspecting the result, we can see that there are two constructions in total (and
     - One *default construction* of the unnamed `Lifetime` from the `get_lifetime()` function
     - And another *move construction* by moving that temporary into `a` in the `main()` (caller) context
 
+I know what you're thinking: "the compiler will optimize both of these into one construction". And you'd be correct. These issues only manifest themselves with -O0. You actually have nothing to worry about. Unless your function is not inline-able or you [somehow mess up RVO](https://www.youtube.com/watch?v=DzUAqXMUjtc).
+
 You probably expected C++17's guaranteed copy-elision (for unnamed RVO) to completely skip the construction inside `get_lifetime()` and instead just construct it at the caller site. The only problem is that URVO is only guaranteed when the return type *exactly matches* the caller type. In our case, a `Lifetime` _is not_ an `std::optional<Lifetime>`, so we need to first construct the `Lifetime` and call the `std::optional<Lifetime>` constructor (which moves or copies the `Lifetime`).
 
 To tell `std::optional` that we want to construct a `Lifetime` in-place, we have to use `std::in_place`; bet you didn't see that one coming. Here's the revised correct copy-elided version that leverages URVO:

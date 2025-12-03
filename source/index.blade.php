@@ -28,10 +28,8 @@
             <x-info-window title="whoami" class="p-4" icon="user">
             <div class="prose prose-stone text-black">
                 <p>
-                    Software and aerospace engineer. Experienced in socket, 
-                    systems, and scientific programming. Currently dipping my 
-                    toes in Rust, Go, and Scheme while working on quantitative development 
-                    and competitive programming.
+                    High performance software engineer, mostly using cpp with a data-oriented approach.
+                    Currently focusing on low-latency and cache-friendly programming.
                 </p>
                 <p>
                     I have spent more hours configuring DevOps and infrastructure than I'm willing

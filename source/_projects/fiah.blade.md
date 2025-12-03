@@ -9,9 +9,6 @@ url: /projects/fiah/index.html
 section: content
 ---
 
-
 # Fast In A Hurry
 ## [WIP]
-Market maker and payment for order flow simulator.
-
-[Github](https://github.com/xbazzi/fastinahurry)
+Trading simulator [Github](https://github.com/xbazzi/fastinahurry)
