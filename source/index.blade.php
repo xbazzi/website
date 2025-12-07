@@ -74,7 +74,7 @@
                     $links = [
                         ['text' => 'GitHub', 'icon_type' => 'brands', 'icon' => 'github', 'link' => 'https://github.com/xbazzi'],
                         ['text' => 'LinkedIn', 'icon_type' => 'brands', 'icon' => 'linkedin', 'link' => 'https://linkedin.com/in/alexbazzi'],
-                        ['text' => 'Gitea', 'icon_type' => 'brands', 'icon' => 'git-alt', 'link' => 'https://gitgud.foo'],
+                        ['text' => 'Gitea', 'icon_type' => 'brands', 'icon' => 'git-alt', 'link' => 'https://gitgud.foo/xbazzi'],
                     ];
                 @endphp
                 <div class="text-verde p-3">
