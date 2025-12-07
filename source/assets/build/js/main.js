@@ -1,2 +1,290 @@
-/*! For license information please see main.js.LICENSE.txt */
-(()=>{"use strict";var t,e={762:()=>{},873:()=>{function t(){var r,n,o="function"==typeof Symbol?Symbol:{},i=o.iterator||"@@iterator",a=o.toStringTag||"@@toStringTag";function u(t,o,i,a){var u=o&&o.prototype instanceof f?o:f,l=Object.create(u.prototype);return e(l,"_invoke",function(t,e,o){var i,a,u,f=0,l=o||[],s=!1,p={p:0,n:0,v:r,a:v,f:v.bind(r,4),d:function(t,e){return i=t,a=0,u=r,p.n=e,c}};function v(t,e){for(a=t,u=e,n=0;!s&&f&&!o&&n<l.length;n++){var o,i=l[n],v=p.p,d=i[2];t>3?(o=d===e)&&(u=i[(a=i[4])?5:(a=3,3)],i[4]=i[5]=r):i[0]<=v&&((o=t<2&&v<i[1])?(a=0,p.v=e,p.n=i[1]):v<d&&(o=t<3||i[0]>e||e>d)&&(i[4]=t,i[5]=e,p.n=d,a=0))}if(o||t>1)return c;throw s=!0,e}return function(o,l,d){if(f>1)throw TypeError("Generator is already running");for(s&&1===l&&v(l,d),a=l,u=d;(n=a<2?r:u)||!s;){i||(a?a<3?(a>1&&(p.n=-1),v(a,u)):p.n=u:p.v=u);try{if(f=2,i){if(a||(o="next"),n=i[o]){if(!(n=n.call(i,u)))throw TypeError("iterator result is not an object");if(!n.done)return n;u=n.value,a<2&&(a=0)}else 1===a&&(n=i.return)&&n.call(i),a<2&&(u=TypeError("The iterator does not provide a '"+o+"' method"),a=1);i=r}else if((n=(s=p.n<0)?u:t.call(e,p))!==c)break}catch(t){i=r,a=1,u=t}finally{f=1}}return{value:n,done:s}}}(t,i,a),!0),l}var c={};function f(){}function l(){}function s(){}n=Object.getPrototypeOf;var p=[][i]?n(n([][i]())):(e(n={},i,function(){return this}),n),v=s.prototype=f.prototype=Object.create(p);function d(t){return Object.setPrototypeOf?Object.setPrototypeOf(t,s):(t.__proto__=s,e(t,a,"GeneratorFunction")),t.prototype=Object.create(v),t}return l.prototype=s,e(v,"constructor",s),e(s,"constructor",l),l.displayName="GeneratorFunction",e(s,a,"GeneratorFunction"),e(v),e(v,a,"Generator"),e(v,i,function(){return this}),e(v,"toString",function(){return"[object Generator]"}),(t=function(){return{w:u,m:d}})()}function e(t,r,n,o){var i=Object.defineProperty;try{i({},"",{})}catch(t){i=0}e=function(t,r,n,o){function a(r,n){e(t,r,function(t){return this._invoke(r,n,t)})}r?i?i(t,r,{value:n,enumerable:!o,configurable:!o,writable:!o}):t[r]=n:(a("next",0),a("throw",1),a("return",2))},e(t,r,n,o)}function r(t,e,r,n,o,i,a){try{var u=t[i](a),c=u.value}catch(t){return void r(t)}u.done?e(c):Promise.resolve(c).then(n,o)}function n(t){return function(){var e=this,n=arguments;return new Promise(function(o,i){var a=t.apply(e,n);function u(t){r(a,o,i,u,c,"next",t)}function c(t){r(a,o,i,u,c,"throw",t)}u(void 0)})}}function o(t){return i.apply(this,arguments)}function i(){return(i=n(t().m(function e(r){var n,o,i;return t().w(function(t){for(;;)switch(t.p=t.n){case 0:return t.p=0,t.n=1,fetch(r);case 1:return n=t.v,t.n=2,n.text();case 2:return o=t.v,t.a(2,o);case 3:return t.p=3,i=t.v,console.error("Failed to fetch RSS feed:",i),t.a(2,null)}},e,null,[[0,3]])}))).apply(this,arguments)}function a(t){for(var e=(new DOMParser).parseFromString(t,"text/xml").querySelectorAll("item"),r="<ul>",n=0;n<Math.min(e.length,8);n++){var o=e[n].querySelector("title").textContent,i=e[n].querySelector("link").textContent;r+='<a href="'.concat(i,'" target="_blank">').concat(o,"</a><br><br>")}return r+="</ul>"}function u(){return(u=n(t().m(function e(){var r,n;return t().w(function(t){for(;;)switch(t.n){case 0:return t.n=1,o("https://1pro71t329.execute-api.us-east-1.amazonaws.com/darknet/rss");case 1:(r=t.v)?(n=a(r),document.getElementById("rss-feed").innerHTML=n):document.getElementById("rss-feed").innerHTML="Failed to load RSS feed.";case 2:return t.a(2)}},e)}))).apply(this,arguments)}document.addEventListener("DOMContentLoaded",function(){console.log("Loading RSS feed"),function(){u.apply(this,arguments)}()})}},r={};function n(t){var o=r[t];if(void 0!==o)return o.exports;var i=r[t]={exports:{}};return e[t](i,i.exports,n),i.exports}n.m=e,t=[],n.O=(e,r,o,i)=>{if(!r){var a=1/0;for(l=0;l<t.length;l++){for(var[r,o,i]=t[l],u=!0,c=0;c<r.length;c++)(!1&i||a>=i)&&Object.keys(n.O).every(t=>n.O[t](r[c]))?r.splice(c--,1):(u=!1,i<a&&(a=i));if(u){t.splice(l--,1);var f=o();void 0!==f&&(e=f)}}return e}i=i||0;for(var l=t.length;l>0&&t[l-1][2]>i;l--)t[l]=t[l-1];t[l]=[r,o,i]},n.o=(t,e)=>Object.prototype.hasOwnProperty.call(t,e),(()=>{var t={829:0,552:0};n.O.j=e=>0===t[e];var e=(e,r)=>{var o,i,[a,u,c]=r,f=0;if(a.some(e=>0!==t[e])){for(o in u)n.o(u,o)&&(n.m[o]=u[o]);if(c)var l=c(n)}for(e&&e(r);f<a.length;f++)i=a[f],n.o(t,i)&&t[i]&&t[i][0](),t[i]=0;return n.O(l)},r=self.webpackChunk=self.webpackChunk||[];r.forEach(e.bind(null,0)),r.push=e.bind(null,r.push.bind(r))})(),n.O(void 0,[552],()=>n(873));var o=n.O(void 0,[552],()=>n(762));o=n.O(o)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./source/_assets/css/main.css":
+/*!*************************************!*\
+  !*** ./source/_assets/css/main.css ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./source/_assets/js/main.js":
+/*!***********************************!*\
+  !*** ./source/_assets/js/main.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+
+function fetchRSSFeed(_x) {
+  return _fetchRSSFeed.apply(this, arguments);
+}
+function _fetchRSSFeed() {
+  _fetchRSSFeed = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(url) {
+    var response, data, _t;
+    return _regenerator().w(function (_context) {
+      while (1) switch (_context.p = _context.n) {
+        case 0:
+          _context.p = 0;
+          _context.n = 1;
+          return fetch(url);
+        case 1:
+          response = _context.v;
+          _context.n = 2;
+          return response.text();
+        case 2:
+          data = _context.v;
+          return _context.a(2, data);
+        case 3:
+          _context.p = 3;
+          _t = _context.v;
+          console.error("Failed to fetch RSS feed:", _t);
+          return _context.a(2, null);
+      }
+    }, _callee, null, [[0, 3]]);
+  }));
+  return _fetchRSSFeed.apply(this, arguments);
+}
+function parseRSSFeed(feedXML) {
+  var parser = new DOMParser();
+  var xmlDoc = parser.parseFromString(feedXML, "text/xml");
+  var items = xmlDoc.querySelectorAll("item");
+  var html = "<ul>";
+  for (var i = 0; i < Math.min(items.length, 8); i++) {
+    var title = items[i].querySelector("title").textContent;
+    var link = items[i].querySelector("link").textContent;
+    html += "<a href=\"".concat(link, "\" target=\"_blank\">").concat(title, "</a><br><br>");
+  }
+  ;
+  html += "</ul>";
+  return html;
+}
+function displayRSSFeed() {
+  return _displayRSSFeed.apply(this, arguments);
+} // Image enlargement functionality
+function _displayRSSFeed() {
+  _displayRSSFeed = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+    var url, rssData, feedHTML;
+    return _regenerator().w(function (_context2) {
+      while (1) switch (_context2.n) {
+        case 0:
+          url = "https://1pro71t329.execute-api.us-east-1.amazonaws.com/darknet/rss";
+          _context2.n = 1;
+          return fetchRSSFeed(url);
+        case 1:
+          rssData = _context2.v;
+          if (rssData) {
+            feedHTML = parseRSSFeed(rssData);
+            document.getElementById("rss-feed").innerHTML = feedHTML;
+          } else {
+            document.getElementById("rss-feed").innerHTML = "Failed to load RSS feed.";
+          }
+        case 2:
+          return _context2.a(2);
+      }
+    }, _callee2);
+  }));
+  return _displayRSSFeed.apply(this, arguments);
+}
+function initImageEnlargement() {
+  // Create modal overlay
+  var modal = document.createElement('div');
+  modal.id = 'image-modal';
+  modal.className = 'image-modal';
+  modal.innerHTML = "\n        <div class=\"image-modal-backdrop\"></div>\n        <button class=\"image-modal-close\" aria-label=\"Close image\">&times;</button>\n        <img class=\"image-modal-content\" src=\"\" alt=\"\">\n    ";
+  document.body.appendChild(modal);
+  var modalImg = modal.querySelector('.image-modal-content');
+  var closeBtn = modal.querySelector('.image-modal-close');
+  var backdrop = modal.querySelector('.image-modal-backdrop');
+
+  // Find all images in prose content (blog posts and projects)
+  var contentImages = document.querySelectorAll('.prose img, .prose-invert img');
+  contentImages.forEach(function (img) {
+    // Add click cursor style
+    img.style.cursor = 'zoom-in';
+
+    // Add click event
+    img.addEventListener('click', function () {
+      modalImg.src = this.src;
+      modalImg.alt = this.alt;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    });
+  });
+
+  // Close modal functions
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+  }
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+
+  // Close on Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', function () {
+  console.log("Loading RSS feed");
+  displayRSSFeed();
+  initImageEnlargement();
+});
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"/js/main": 0,
+/******/ 			"css/main": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	__webpack_require__.O(undefined, ["css/main"], () => (__webpack_require__("./source/_assets/js/main.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/main"], () => (__webpack_require__("./source/_assets/css/main.css")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
+/******/ })()
+;

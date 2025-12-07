@@ -61,7 +61,7 @@ Inspecting the result, we can see that there are two constructions in total (and
     - One *default construction* of the unnamed `Lifetime` from the `get_lifetime()` function
     - And another *move construction* by moving that temporary into `a` in the `main()` (caller) context
 
-<blockquote class="border-l-4 border-blue-400 bg-gray-800 p-4 italic my-4 text-white">
+<blockquote class="border-l-4 border-blue-400 bg-amber-50 p-4 italic my-4 text-black">
 I know what you're thinking: "the compiler will optimize both of these into one construction". And you'd be correct. These issues only manifest themselves with -O0. You actually have nothing to worry about. Unless your function is not inline-able or you <a href="https://www.youtube.com/watch?v=DzUAqXMUjtc" class="text-blue-300 hover:text-blue-200">somehow mess up RVO</a>.
 </blockquote>
 
@@ -85,7 +85,7 @@ Now we get the expected behavior: the `Lifetime` constructor is called _once_.
 1       Lifetime::~Lifetime()
 ```
 
-I know what you're thinking. Yes, there is an `std::optional` parameterized constructor that takes in an `std::in_place`. Same thing goes for `std::expected`, `std::tuple`, `std::pair`, and probably other STL wrappers. 
+Yes, there is an `std::optional` parameterized constructor that takes in an `std::in_place`. Same thing goes for `std::expected`, `std::tuple`, `std::pair`, and probably other STL wrappers. 
 
 ![std::optional constructors](/assets/img/optional_ctors.png)
 

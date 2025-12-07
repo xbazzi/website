@@ -9,7 +9,7 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     <title>Optimizing Return Value Optimization</title>
     <script src="https://kit.fontawesome.com/6faa1ef8ce.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/assets/build/css/main.css?id=924fa466ba1d913e3b24618846a5b3eb">
+    <link rel="stylesheet" href="/assets/build/css/main.css?id=462e671b0e07461a4dc8b768a1416a5c">
     <script defer src="/assets/build/js/main.js?id=01df21462df854b43af5932420e47cda"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/night-owl.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
@@ -94,7 +94,7 @@
     - One <em>default construction</em> of the unnamed <code>Lifetime</code> from the <code>get_lifetime()</code> function
     - And another <em>move construction</em> by moving that temporary into <code>a</code> in the <code>main()</code> (caller) context</p>
 
-<blockquote class="border-l-4 border-blue-400 bg-gray-800 p-4 italic my-4 text-white">
+<blockquote class="border-l-4 border-blue-400 bg-amber-50 p-4 italic my-4 text-black">
 I know what you're thinking: "the compiler will optimize both of these into one construction". And you'd be correct. These issues only manifest themselves with -O0. You actually have nothing to worry about. Unless your function is not inline-able or you <a href="https://www.youtube.com/watch?v=DzUAqXMUjtc" class="text-blue-300 hover:text-blue-200">somehow mess up RVO</a>.
 </blockquote>
 
@@ -117,7 +117,7 @@ I know what you're thinking: "the compiler will optimize both of these into one 
 1       Lifetime::~Lifetime()
 </code></pre>
 
-<p>I know what you're thinking. Yes, there is an <code>std::optional</code> parameterized constructor that takes in an <code>std::in_place</code>. Same thing goes for <code>std::expected</code>, <code>std::tuple</code>, <code>std::pair</code>, and probably other STL wrappers.</p>
+<p>Yes, there is an <code>std::optional</code> parameterized constructor that takes in an <code>std::in_place</code>. Same thing goes for <code>std::expected</code>, <code>std::tuple</code>, <code>std::pair</code>, and probably other STL wrappers.</p>
 
 <p><img src="/assets/img/optional_ctors.png" alt="std::optional constructors" /></p>
 
