@@ -7,6 +7,61 @@
     src: url("/assets/fonts/monaspace-krypton.otf");
 }
 
+code {
+    background: #262626;
+    padding: 3px;
+    border-radius: 4px;
+}
+
+code.hljs {
+    padding: 3px;
+    border-radius: 10px;
+}
+
+blockquote {
+    border-left: 4px solid green !important;
+    padding: 5px;
+    color: black !important;
+    font-style: italic;
+    background-color: #78c170;
+    border-radius: 10px;
+}
+
+blockquote a {
+    color: blue !important;
+}
+
+blockquote code {
+    color: white !important;
+}
+
+blockquote::before {
+    padding-right: 5px;
+    margin-top: 0px;
+    content: "ℹ️" !important;
+    /* display: inline-block !important; */
+    display: block !important;
+    /* float: left !important; */
+}
+
+blockquote {
+    display: flex !important;
+    align-items: left;
+}
+
+blockquote p::before {
+    content: "" !important;
+}
+
+blockquote p::after {
+    content: "" !important;
+}
+
+code::before,
+code::after {
+    content: "" !important;
+}
+
 :root {
     --background: rgba(150, 150, 150, 0.8);
     --main-color: #bf00ff;
@@ -174,6 +229,7 @@ body {
         transform: scale(0.8);
         opacity: 0;
     }
+
     to {
         transform: scale(1);
         opacity: 1;

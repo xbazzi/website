@@ -1,6 +1,6 @@
 ---
 extends: _layouts.blog 
-title: Optimizing Return Value Optimization
+title: Do you even RVO?
 author: Xander Bazzi
 date: 2025-01-25
 collaborators: nobody
@@ -9,7 +9,7 @@ url: /blog/rvo/index.html
 section: content
 ---
 
-<h1 class="text-verde">Optimizing RVO</h1>
+<h1 class="text-verde">Do you even RVO?</h1>
 
 Look at the code snippet below. How many times is `MyType{}` constructed? What about `std::optional<MyType>`?
 
@@ -24,10 +24,10 @@ std::optional<MyType> get_mytype(std::uint64_t some_val) {
 
 If you've used C++17's `std::optional`, you might have code that resembles the above. But is this the proper way of returning an `optional`? Let's reason about it:
 1)   We call the `MyType` default constructor
-2)   Then we call the optional copy constructor _implicitly_ with the `MyType` value. Wait, but then are we constructing two objects? One `optional` and one `MyType`?
-3)   No, that can't be... We must be constructing the `MyType` r-value inside the optional. But then that means the `optional` had to be constructed prior...
+2)   Then we call the optional copy constructor _implicitly_ with the `MyType` value. Wait, but then are we constructing two objects? One `std::optional` and one `MyType`?
+3)   No, that can't be... We must be constructing the `MyType` r-value inside the optional. But then that means the `std::optional` had to be constructed prior...
 
-After going throught these mental gymnastics, you might reach the conclusion that there are technically *two* constructions. And reasonably so, you might also assume that the compiler will optimize them both into a single in-place construction of an `optional` with the corresponding `MyType` object (somehow). Unfortunately, in true CPP fashion, this couldn't be further from the truth.
+After going throught these mental gymnastics, you might reach the conclusion that there are technically *two* constructions. And reasonably so, you might also assume that the compiler will optimize them both into a single in-place construction of an `std::optional` with the corresponding `MyType` object (somehow). Unfortunately, in true CPP fashion, this couldn't be further from the truth.
 
 Let's replace our `get_mytype` function with something a little more useful. To help us get some insight into the object lifetime, let's write a function that returns a canonical `Lifetime` [tracker](https://github.com/xbazzi/programmatic-playground/blob/master/cpp/my_std_lib/Lifetime.cc):
 
@@ -61,9 +61,7 @@ Inspecting the result, we can see that there are two constructions in total (and
     - One *default construction* of the unnamed `Lifetime` from the `get_lifetime()` function
     - And another *move construction* by moving that temporary into `a` in the `main()` (caller) context
 
-<blockquote class="border-l-4 border-blue-400 bg-amber-50 p-4 italic my-4 text-black">
-I know what you're thinking: "the compiler will optimize both of these into one construction". And you'd be correct. These issues only manifest themselves with -O0. You actually have nothing to worry about. Unless your function is not inline-able or you <a href="https://www.youtube.com/watch?v=DzUAqXMUjtc" class="text-blue-300 hover:text-blue-200">somehow mess up RVO</a>.
-</blockquote>
+> I know what you're thinking: "the compiler will optimize both of these into one construction". And you'd be correct **if** the `Lifetime` class had a default constructor. But it doesn't, and neither do most classes. Here's a good Jason Turner <a href="https://www.youtube.com/watch?v=DzUAqXMUjtc" class="text-blue-300 hover:text-blue-200">video on RVO</a>.
 
 You probably expected C++17's guaranteed copy-elision (for unnamed RVO) to completely skip the construction inside `get_lifetime()` and instead just construct it at the caller site. The only problem is that URVO is only guaranteed when the return type *exactly matches* the caller type. In our case, a `Lifetime` _is not_ an `std::optional<Lifetime>`, so we need to first construct the `Lifetime` and call the `std::optional<Lifetime>` constructor (which moves or copies the `Lifetime`).
 

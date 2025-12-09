@@ -7,9 +7,9 @@
     <link rel="canonical" href="/blog/rvo">
     <meta name="description" content="Website description.">
     <script src="//unpkg.com/alpinejs" defer></script>
-    <title>Optimizing Return Value Optimization</title>
+    <title>Do you even RVO?</title>
     <script src="https://kit.fontawesome.com/6faa1ef8ce.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/assets/build/css/main.css?id=f16a1eb95089133415de4794862aba59">
+    <link rel="stylesheet" href="/assets/build/css/main.css?id=899acfa9c11338b41ec00c2e8c23608f">
     <script defer src="/assets/build/js/main.js?id=494d360325a110ec900045663b36be48"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/night-owl.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
@@ -35,7 +35,7 @@
         <div class="flex justify-between gap-2 items-center pl-1">
             <div class="flex gap-3 items-center">
                 <span class="fa-solid fa-terminal"></span>
-                <p class="text-white">Optimizing Return Value Optimization</p>
+                <p class="text-white">Do you even RVO?</p>
             </div>
             <span class="fa-solid fa-lightbulb"></span>
         </div>
@@ -45,7 +45,7 @@
                 bg-gradient-to-b from-black/90 via-black/90 to-black/90">
         <p class="font-bold text-xsm pl-4 pt-4 text-verde text-xs">Written by Xander Bazzi on 01-25-25</p>
         <div class="my-4 mx-auto prose prose-invert prose-img:max-w-lg prose-img:mx-auto">
-            <h1 class="text-verde">Optimizing RVO</h1>
+            <h1 class="text-verde">Do you even RVO?</h1>
 
 <p>Look at the code snippet below. How many times is <code>MyType{}</code> constructed? What about <code>std::optional&lt;MyType&gt;</code>?</p>
 
@@ -59,10 +59,10 @@
 
 <p>If you've used C++17's <code>std::optional</code>, you might have code that resembles the above. But is this the proper way of returning an <code>optional</code>? Let's reason about it:
 1)   We call the <code>MyType</code> default constructor
-2)   Then we call the optional copy constructor <em>implicitly</em> with the <code>MyType</code> value. Wait, but then are we constructing two objects? One <code>optional</code> and one <code>MyType</code>?
-3)   No, that can't be... We must be constructing the <code>MyType</code> r-value inside the optional. But then that means the <code>optional</code> had to be constructed prior...</p>
+2)   Then we call the optional copy constructor <em>implicitly</em> with the <code>MyType</code> value. Wait, but then are we constructing two objects? One <code>std::optional</code> and one <code>MyType</code>?
+3)   No, that can't be... We must be constructing the <code>MyType</code> r-value inside the optional. But then that means the <code>std::optional</code> had to be constructed prior...</p>
 
-<p>After going throught these mental gymnastics, you might reach the conclusion that there are technically <em>two</em> constructions. And reasonably so, you might also assume that the compiler will optimize them both into a single in-place construction of an <code>optional</code> with the corresponding <code>MyType</code> object (somehow). Unfortunately, in true CPP fashion, this couldn't be further from the truth.</p>
+<p>After going throught these mental gymnastics, you might reach the conclusion that there are technically <em>two</em> constructions. And reasonably so, you might also assume that the compiler will optimize them both into a single in-place construction of an <code>std::optional</code> with the corresponding <code>MyType</code> object (somehow). Unfortunately, in true CPP fashion, this couldn't be further from the truth.</p>
 
 <p>Let's replace our <code>get_mytype</code> function with something a little more useful. To help us get some insight into the object lifetime, let's write a function that returns a canonical <code>Lifetime</code> <a href="https://github.com/xbazzi/programmatic-playground/blob/master/cpp/my_std_lib/Lifetime.cc">tracker</a>:</p>
 
@@ -94,8 +94,8 @@
     - One <em>default construction</em> of the unnamed <code>Lifetime</code> from the <code>get_lifetime()</code> function
     - And another <em>move construction</em> by moving that temporary into <code>a</code> in the <code>main()</code> (caller) context</p>
 
-<blockquote class="border-l-4 border-blue-400 bg-amber-50 p-4 italic my-4 text-black">
-I know what you're thinking: "the compiler will optimize both of these into one construction". And you'd be correct. These issues only manifest themselves with -O0. You actually have nothing to worry about. Unless your function is not inline-able or you <a href="https://www.youtube.com/watch?v=DzUAqXMUjtc" class="text-blue-300 hover:text-blue-200">somehow mess up RVO</a>.
+<blockquote>
+  <p>I know what you're thinking: "the compiler will optimize both of these into one construction". And you'd be correct <strong>if</strong> the <code>Lifetime</code> class had a default constructor. But it doesn't, and neither do most classes. Here's a good Jason Turner <a href="https://www.youtube.com/watch?v=DzUAqXMUjtc" class="text-blue-300 hover:text-blue-200">video on RVO</a>.</p>
 </blockquote>
 
 <p>You probably expected C++17's guaranteed copy-elision (for unnamed RVO) to completely skip the construction inside <code>get_lifetime()</code> and instead just construct it at the caller site. The only problem is that URVO is only guaranteed when the return type <em>exactly matches</em> the caller type. In our case, a <code>Lifetime</code> <em>is not</em> an <code>std::optional&lt;Lifetime&gt;</code>, so we need to first construct the <code>Lifetime</code> and call the <code>std::optional&lt;Lifetime&gt;</code> constructor (which moves or copies the <code>Lifetime</code>).</p>
