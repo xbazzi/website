@@ -19,26 +19,16 @@
         pkgs = import nixpkgs { inherit system; };
         llvm = pkgs.llvmPackages_latest;
         lib = nixpkgs.lib;
-        pythonPackages = pkgs.python313Packages;
-        pyPkgs = with pythonPackages; [
-          pandas
-          matplotlib
-          numpy
-          plotly
-          seaborn
-        ];
-
       in
       {
         # devShell = pkgs.mkShell.override { stdenv = pkgs.clangStdenv; } rec {
         devShell = pkgs.mkShell {
-          nativeBuildInputs =
-            pyPkgs
-            ++ (with pkgs; [
-              php
-              php84Packages.composer
-              nodejs_22
-            ]);
+          nativeBuildInputs = with pkgs; [
+            php
+            php84Packages.composer
+            nodejs_22
+            just
+          ];
 
           shell = pkgs.zsh;
           shellHook = ''
